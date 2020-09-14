@@ -35,7 +35,8 @@ def dict_maker(data):
                 try:
                     master[int(row[0])][column] = float(row[firstline.index(column)])
                 except:
-                    master[int(row[0])][column] = row[firstline.index(column)]    
+                    master[int(row[0])][column] = row[firstline.index(column)]
+                    
     return master
 
 cancer_dict = dict_maker(cancer_data)
@@ -95,6 +96,7 @@ def create_undirected_graph_from_edge_list(edge_list):
 
 undirected_cancer = create_undirected_graph_from_edge_list(edge_list)
 undirected_healthy = create_undirected_graph_from_edge_list(edge_list)
+
 nx.set_node_attributes(undirected_cancer,cancer_dict)
 nx.set_node_attributes(undirected_healthy, healthy_dict)
 
@@ -183,6 +185,7 @@ def prediction(input_graph,node_to_predict,level,cancer,sample):
             x = give_level_2(input_graph,node,node_to_predict)
             for i in x:
                 neighbors.append(i)
+    
     if(neighbors == []):
         if(cancer == True):
             new = get_uniform_attributes_cancer(cancer_dict,sample)
